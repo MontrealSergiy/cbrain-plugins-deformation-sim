@@ -7,7 +7,7 @@
 	"shell": "/bin/bash ",
 	"command-line": "deformation_2.pl [INPUT] [OUTPUT] [DEFORMATION_RATIO] [COORDINATE] [TOLERANCE_SPACE] [BLUR_DETERMINANT] [ERROR] [ITERATION] && cp [INPUT]_deformed_by* [OUTPUT]; if [ yes == [DELTMP] ]; then rm -rf [OUTPUT]/TMP; fi",
 	"output-files": [{
-		"id": "output",
+		"id": "outdir",
 		"name": "Output",
 		"description": "A folder containing resulting, deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
 		"path-template": "[OUTPUT]",
@@ -136,30 +136,14 @@
 			"neuroimaging"
 		]
 	},
-  	"output-files": [{
-			"id": "result",
-			"name": "Result",
-			"description": "The resulting, deformed image, where the name of the input file is augmented by prefix deformed_by_0.4atROIx70-y100-z70dimx10.dimy10.dimz10.mnc, constructed using input parameter values",
-			"value-key": "[RESULT]",
-			"path-template": "[RESULT]",
-			"list": false,
-			"optional": false
-		},
+	"groups": [
 		{
-			"id": "output",
-			"name": "ouptut",
-			"description": "The resulting, deformed image, where the name of the input file is augmented by prefix deformed_by_0.4atROIx70-y100-z70dimx10.dimy10.dimz10.mnc, constructed using input parameter values",
-			"path-template": "[OUTPUT]",
-			"path-template-stripped-extensions": [
-				".mnc",
-				".minc",
-				".mnc.gz",
-				".minc.gz"
-			],
-			"list": false,
-			"optional": false
+			"id": "location",
+			"name": "Deformation location",
+			"description": "You can either provide mask or coordinates of deformation",
+			"members": ["coordinate", "mask"],
+			"mutually-exclusive": true
 		}
-
 	],
 	"suggested-resources": {
 		"ram": 4,
