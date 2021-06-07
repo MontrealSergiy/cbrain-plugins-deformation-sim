@@ -1,15 +1,15 @@
 {
 	"name": "DeformationSimulation",
 	"tool-version": "v1",
-	"description": "This is a brain deformation field simulation script that consists from a perl wrapper and a software     This PERL script is a wrapper that is calling sequence of commands for generating deformation fields scrips     from      https://wiki.mouseimaging.ca/display/MICePub/Generating+deformation+fields",
-	"author": "Naj",
-	"descriptor-url": "htpps://github.com/MontrealSergiy",
+	"description": "This is a brain deformation field simulation script that consists from a perl wrapper and a software     This PERL script is a wrapper that is calling sequence of commands for generating deformation fields scrips from https://wiki.mouseimaging.ca/display/MICePub/Generating+deformation+fields",
+	"author": "Naj Mahani",
+	"descriptor-url": "https://github.com/MontrealSergiy/cbrain-plugins-deformation-sim",
 	"shell": "/bin/bash ",
 	"command-line": "deformation_2.pl [INPUT] [OUTPUT] [DEFORMATION_RATIO] [COORDINATE] [TOLERANCE_SPACE] [BLUR_DETERMINANT] [ERROR] [ITERATION] && cp [INPUT]_deformed_by* [OUTPUT]; if [ yes == [DELTMP] ]; then rm -rf [OUTPUT]/TMP; fi",
 	"output-files": [{
-		"id": "result",
-		"name": "Result",
-		"description": "Results include deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
+		"id": "output",
+		"name": "Output",
+		"description": "A folder containing resulting, deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
 		"path-template": "[OUTPUT]",
 		"list": false,
 		"optional": false
@@ -26,7 +26,7 @@
 		},
 		{
 			"command-line-flag": "-mask",
-			"description": "a tolerance map file (.mnc) indicating voxels that have a different amount of error allowed e.g., CSF, background",
+			"description": "A tolerance map file (.mnc) indicating voxels that have a different amount of error allowed e.g., CSF, background",
 			"value-key": "[INPUT]",
 			"optional": true,
 			"list": false,
@@ -54,7 +54,7 @@
 			"type": "Number",
 			"id": "deformation_ratio",
 			"name": "Config",
-			"description": "deformation ratios. Values must be between 0.1 to 1.50"
+			"description": "Deformation ratios. Values must be between 0.1 to 1.50"
 		},
 		{
 			"command-line-flag": "-coordinate",
@@ -128,29 +128,39 @@
 			],
 			"value-key": "[DELTMP]"
 		}
-
-
-
-	],
-  	"groups": [
-
-		{
-			"id": "location",
-			"name": "Deformation location",
-			"description": "You can either provide mask or coordinates of deformation",
-			"members": ["coordinate", "mask"],
-			"mutually-exclusive": true
-		}
-
 	],
 	"schema-version": "0.5",
-
 	"tags": {
 		"domain": [
 			"neuroinformatics",
 			"neuroimaging"
 		]
 	},
+  	"output-files": [{
+			"id": "result",
+			"name": "Result",
+			"description": "The resulting, deformed image, where the name of the input file is augmented by prefix deformed_by_0.4atROIx70-y100-z70dimx10.dimy10.dimz10.mnc, constructed using input parameter values",
+			"value-key": "[RESULT]",
+			"path-template": "[RESULT]",
+			"list": false,
+			"optional": false
+		},
+		{
+			"id": "output",
+			"name": "ouptut",
+			"description": "The resulting, deformed image, where the name of the input file is augmented by prefix deformed_by_0.4atROIx70-y100-z70dimx10.dimy10.dimz10.mnc, constructed using input parameter values",
+			"path-template": "[OUTPUT]",
+			"path-template-stripped-extensions": [
+				".mnc",
+				".minc",
+				".mnc.gz",
+				".minc.gz"
+			],
+			"list": false,
+			"optional": false
+		}
+
+	],
 	"suggested-resources": {
 		"ram": 4,
 		"walltime-estimate": 1000
