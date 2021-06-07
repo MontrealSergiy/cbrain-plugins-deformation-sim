@@ -1,0 +1,158 @@
+{
+	"name": "DeformationSimulation",
+	"tool-version": "v1",
+	"description": "This is a brain deformation field simulation script that consists from a perl wrapper and a software     This PERL script is a wrapper that is calling sequence of commands for generating deformation fields scrips     from      https://wiki.mouseimaging.ca/display/MICePub/Generating+deformation+fields",
+	"author": "Naj",
+	"descriptor-url": "htpps://github.com/MontrealSergiy",
+	"shell": "/bin/bash ",
+	"command-line": "deformation_2.pl [INPUT] [OUTPUT] [DEFORMATION_RATIO] [COORDINATE] [TOLERANCE_SPACE] [BLUR_DETERMINANT] [ERROR] [ITERATION] && cp [INPUT]_deformed_by* [OUTPUT]; if [ yes == [DELTMP] ]; then rm -rf [OUTPUT]/TMP; fi",
+	"output-files": [{
+		"id": "result",
+		"name": "Result",
+		"description": "Results include deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
+		"path-template": "[OUTPUT]",
+		"list": false,
+		"optional": false
+	}],
+	"inputs": [{
+			"command-line-flag": "-input",
+			"description": "Brain image in minc format",
+			"value-key": "[INPUT]",
+			"optional": false,
+			"list": false,
+			"type": "File",
+			"id": "input",
+			"name": "Input"
+		},
+		{
+			"command-line-flag": "-mask",
+			"description": "a tolerance map file (.mnc) indicating voxels that have a different amount of error allowed e.g., CSF, background",
+			"value-key": "[INPUT]",
+			"optional": true,
+			"list": false,
+			"type": "File",
+			"id": "mask",
+			"name": "Mask"
+		},
+		{
+			"command-line-flag": "-output",
+			"description": "A folder containing resulting, deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
+			"value-key": "[OUTPUT]",
+			"optional": false,
+			"list": false,
+			"type": "String",
+			"id": "output",
+			"name": "Output"
+		},
+		{
+			"command-line-flag": "-deformation_ratio",
+			"value-key": "[DEFORMATION_RATIO]",
+			"optional": false,
+			"list": true,
+			"minimum": 0.1,
+			"maximum": 1.5,
+			"type": "Number",
+			"id": "deformation_ratio",
+			"name": "Config",
+			"description": "deformation ratios. Values must be between 0.1 to 1.50"
+		},
+		{
+			"command-line-flag": "-coordinate",
+			"value-key": "[COORDINATE]",
+			"optional": true,
+			"list": true,
+			"min-list-entries": 6,
+			"max-list-entries": 6,
+			"type": "Number",
+			"id": "coordinate",
+			"name": "Coordinates",
+			"description": "Six values <x> <y> <z> <sizex> <sizey> <sizez>"
+		},
+		{
+			"command-line-flag": "-tolerance_space",
+			"value-key": "[TOLERANCE_SPACE]",
+			"optional": false,
+			"list": false,
+			"integer": true,
+			"default-value": 4,
+			"type": "Number",
+			"id": "tolerance_space",
+			"name": "Tolerance space",
+			"description": "Define the area of tolerance around the deformation."
+		},
+		{
+			"command-line-flag": "-blur_determinant",
+			"value-key": "[BLUR_DETERMINANT]",
+			"optional": false,
+			"list": false,
+			"maximum": 1,
+			"minimum": 0,
+			"default-value": 0.25,
+			"type": "Number",
+			"id": "blur_determinant",
+			"name": "Blur determinant",
+			"description": "Blurring kernel size for blurring deformation determinant blurring kernel 0-1"
+		},
+		{
+			"command-line-flag": "-error",
+			"value-key": "[ERROR]",
+			"optional": false,
+			"list": false,
+			"default-value": 0.00001,
+			"type": "Number",
+			"id": "error",
+			"name": "Error",
+			"description": "Specify the amount of error that is allowed between the specified determinant and the final determinant (per voxel)"
+		},
+		{
+			"command-line-flag": "-iteration",
+			"value-key": "[ITERATION]",
+			"optional": false,
+			"list": false,
+			"default-value": 100,
+			"type": "Number",
+			"integer": true,
+			"minimum": -1,
+			"id": "iteration",
+			"name": "Iteration",
+			"description": "Specify the maximum number of iterations to update the deformations field (-1 means until convergence)"
+		},
+		{
+			"id": "deltmp",
+			"name": "Delete temporary and intermediate files",
+			"default-value": "yes",
+			"type": "String",
+			"value-choices": [
+				"yes",
+				"no"
+			],
+			"value-key": "[DELTMP]"
+		}
+
+
+
+	],
+  	"groups": [
+
+		{
+			"id": "location",
+			"name": "Deformation location",
+			"description": "You can either provide mask or coordinates of deformation",
+			"members": ["coordinate", "mask"],
+			"mutually-exclusive": true
+		}
+
+	],
+	"schema-version": "0.5",
+
+	"tags": {
+		"domain": [
+			"neuroinformatics",
+			"neuroimaging"
+		]
+	},
+	"suggested-resources": {
+		"ram": 4,
+		"walltime-estimate": 1000
+	}
+}
