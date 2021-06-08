@@ -1,5 +1,5 @@
 {
-	"name": "DeformationSimulation",
+	"name": "DeformSim",
 	"tool-version": "v1",
 	"description": "This is a brain deformation field simulation script that consists from a perl wrapper and a software     This PERL script is a wrapper that is calling sequence of commands for generating deformation fields scrips from https://wiki.mouseimaging.ca/display/MICePub/Generating+deformation+fields",
 	"author": "Naj Mahani",
@@ -53,6 +53,7 @@
 			"minimum": 0.1,
 			"maximum": 1.5,
 			"type": "Number",
+			"list-separator": ",",
 			"id": "deformation_ratio",
 			"name": "Deformation ratio",
 			"description": "Deformation ratios. Values must be between 0.1 to 1.50"
