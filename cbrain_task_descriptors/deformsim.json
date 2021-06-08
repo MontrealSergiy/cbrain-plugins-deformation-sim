@@ -53,7 +53,7 @@
 			"maximum": 1.5,
 			"type": "Number",
 			"id": "deformation_ratio",
-			"name": "Config",
+			"name": "Deformation ratio",
 			"description": "Deformation ratios. Values must be between 0.1 to 1.50"
 		},
 		{
