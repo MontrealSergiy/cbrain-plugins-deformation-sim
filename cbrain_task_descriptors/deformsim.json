@@ -1,5 +1,5 @@
 {
-        "name": "DeformSim1",
+        "name": "DeformSim",
         "tool-version": "v3",
         "description": "This is a brain deformation field simulation script that consists from a perl wrapper and a software     This PERL script is a wrapper that is calling sequence of commands for generating deformation fields scrips from https://wiki.mouseimaging.ca/display/MICePub/Generating+deformation+fields",
         "author": "Naj Mahani",
