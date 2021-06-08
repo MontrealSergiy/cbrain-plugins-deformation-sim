@@ -142,7 +142,8 @@
 			"name": "Deformation location",
 			"description": "You can either provide mask or coordinates of deformation",
 			"members": ["coordinate", "mask"],
-			"mutually-exclusive": true
+			"mutually-exclusive": true,
+			"one-is-required": true
 		}
 	],
 	"suggested-resources": {
