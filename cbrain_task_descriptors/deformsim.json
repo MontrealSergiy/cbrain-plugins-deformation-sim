@@ -5,9 +5,10 @@
 	"author": "Naj Mahani",
 	"descriptor-url": "https://github.com/MontrealSergiy/cbrain-plugins-deformation-sim/blob/main/cbrain_task_descriptors/deformsim.json",
 	"shell": "/bin/bash ",
-	"command-line": "deformation.pl [INPUT] [OUTPUT] [DEFORMATION_RATIO] [COORDINATE] [TOLERANCE_SPACE] [BLUR_DETERMINANT] [ERROR] [ITERATION] && cp [INPUT]_deformed_by* [OUTPUT]; if [ yes == [DELTMP] ]; then rm -rf [OUTPUT]/TMP; fi",
+	"command-line": "deformation.pl [INPUT] [OUTPUT] [DEFORMATION_RATIO] [COORDINATE] [TOLERANCE_SPACE] [BLUR_DETERMINANT] [ERROR] [ITERATION] && cp [INPUT]_deformed_by* [OUTPUT]; if [ yes == [DELTMP] ]; then rm -rf [OUTDIR]/TMP; fi",
 	"output-files": [{
 		"id": "outdir",
+		"value-key": "[OUTDIR]",
 		"name": "Output",
 		"description": "A folder containing resulting, deformed image, where the name of the input file is by prefix deformed_by and values defined from ratio and coordinates, and optionally tmp files for debugging",
 		"path-template": "[OUTPUT]",
